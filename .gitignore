@@ -1,9 +1,20 @@
-# Carpetas de Visual Studio
+# Archivos y carpetas de Visual Studio
 .vs/
 bin/
 obj/
-
-# Archivos temporales
 *.user
 *.suo
 *.log
+
+# Archivos de configuración locales
+launchSettings.json
+
+# Paquetes NuGet
+packages/
+*.nupkg
+
+# Archivos de compilación
+*.dll
+*.exe
+*.pdb
+*.cache
