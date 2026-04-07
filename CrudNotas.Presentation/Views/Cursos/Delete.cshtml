@@ -1,0 +1,36 @@
+﻿@model CrudNotas.EntityLayer.Curso
+
+<h2>Eliminar Curso</h2>
+
+<div>
+    <h4>¿Seguro que deseas eliminar este curso?</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.Nombre</dd>
+
+        <dt class="col-sm-2">Descripción</dt>
+        <dd class="col-sm-10">@Model.Descripcion</dd>
+    </dl>
+</div>
+
+@if (Model.Notas != null && Model.Notas.Any())
+{
+    <div class="alert alert-warning">
+        Este curso tiene <strong>@Model.Notas.Count</strong> nota(s) asociada(s).
+        Si eliminas el curso, también se perderán todas las notas vinculadas.
+    </div>
+
+    <h5>Notas asociadas:</h5>
+    <ul>
+        @foreach (var nota in Model.Notas)
+        {
+            <li>@nota.Titulo (@nota.FechaCreacion.ToString("dd/MM/yyyy"))</li>
+        }
+    </ul>
+}
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CrudNotas.EntityLayer.Nota>
+
+@if (ViewBag.Curso != null)
+{
+    <h2>Notas del Curso: @ViewBag.Curso.Nombre</h2>
+}
+else
+{
+    <h2>Listado de Notas</h2>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nueva Nota</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Contenido</th>
+            <th>Fecha de Creación</th>
+            <th>Curso</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+        {
+            
+        
+        foreach (var nota in Model)
+        {
+            <tr>
+                <td>@nota.Titulo</td>
+                <td>@nota.Contenido</td>
+                <td>@nota.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@nota.Curso?.Nombre</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@nota.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@nota.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+            }
+            
+        }
+    </tbody>
+</table>

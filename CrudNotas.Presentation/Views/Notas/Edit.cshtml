@@ -1,0 +1,30 @@
+﻿@model CrudNotas.EntityLayer.Nota
+
+<h2>Editar Nota</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label for="Titulo">Título</label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Contenido">Contenido</label>
+        <textarea asp-for="Contenido" class="form-control"></textarea>
+        <span asp-validation-for="Contenido" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="CursoId">Curso</label>
+        <select asp-for="CursoId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Cursos, "Id", "Nombre", Model.CursoId))">
+        </select>
+        <span asp-validation-for="CursoId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
