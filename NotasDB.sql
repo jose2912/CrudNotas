@@ -132,10 +132,16 @@ CREATE OR ALTER PROCEDURE sp_DeleteCurso
     @Id INT
 AS
 BEGIN
+    -- Primero borrar notas asociadas
+    DELETE FROM Notas WHERE CursoId = @Id;
+
+    -- Luego borrar el curso
     DELETE FROM Cursos WHERE Id = @Id;
 END
 GO
 
+
+select * from Cursos where Id=1
 -- Procedimiento: Obtener curso por Id (útil para Editar)
 CREATE OR ALTER PROCEDURE sp_GetCursoById
     @Id INT

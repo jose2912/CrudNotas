@@ -23,7 +23,7 @@ namespace CrudNotas.BusinessLayer
         public Curso ObtenerCurso(int id)
         {
             // Como tu DAL no tiene un método específico, lo buscamos en la lista
-            return _cursoDAL.GetCursos().Find(c => c.Id == id);
+            return _cursoDAL.ObtenerCurso(id);
         }
 
         // Insertar curso

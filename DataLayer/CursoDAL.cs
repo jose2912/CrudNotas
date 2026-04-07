@@ -15,7 +15,36 @@ namespace CrudNotas.DataLayer
         {
             _conexion = conexion;
         }
+        // Obtener curso por Id
+        public Curso ObtenerCurso(int id)
+        {
+            Curso curso = null;
 
+            using (var cn = _conexion.ConectarDB())
+            {
+                using (var cmd = new SqlCommand("sp_GetCursoById", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            curso = new Curso
+                            {
+                                Id = (int)reader["Id"],
+                                Nombre = reader["Nombre"].ToString(),
+                                Descripcion = reader["Descripcion"].ToString(),
+                                CantidadNotas = (int)reader["CantidadNotas"]
+                            };
+                        }
+                    }
+                }
+            }
+
+            return curso;
+        }
         // Listar cursos
         public List<Curso> GetCursos()
         {
